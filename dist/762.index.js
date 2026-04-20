@@ -1,16 +1,15 @@
-"use strict";
-exports.id = 762;
-exports.ids = [762];
-exports.modules = {
+export const id = 762;
+export const ids = [762];
+export const modules = {
 
-/***/ 77709:
+/***/ 7709:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.resolveHttpAuthSchemeConfig = exports.defaultSigninHttpAuthSchemeProvider = exports.defaultSigninHttpAuthSchemeParametersProvider = void 0;
 const core_1 = __webpack_require__(8704);
-const util_middleware_1 = __webpack_require__(76324);
+const util_middleware_1 = __webpack_require__(6324);
 const defaultSigninHttpAuthSchemeParametersProvider = async (config, context, input) => {
     return {
         operation: (0, util_middleware_1.getSmithyContext)(context).operation,
@@ -66,15 +65,15 @@ exports.resolveHttpAuthSchemeConfig = resolveHttpAuthSchemeConfig;
 
 /***/ }),
 
-/***/ 12547:
+/***/ 2547:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.defaultEndpointResolver = void 0;
-const util_endpoints_1 = __webpack_require__(83068);
-const util_endpoints_2 = __webpack_require__(79674);
-const ruleset_1 = __webpack_require__(36904);
+const util_endpoints_1 = __webpack_require__(3068);
+const util_endpoints_2 = __webpack_require__(9674);
+const ruleset_1 = __webpack_require__(6904);
 const cache = new util_endpoints_2.EndpointCache({
     size: 50,
     params: ["Endpoint", "Region", "UseDualStack", "UseFIPS"],
@@ -91,41 +90,169 @@ util_endpoints_2.customEndpointFunctions.aws = util_endpoints_1.awsEndpointFunct
 
 /***/ }),
 
-/***/ 36904:
+/***/ 6904:
 /***/ ((__unused_webpack_module, exports) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.ruleSet = void 0;
 const u = "required", v = "fn", w = "argv", x = "ref";
-const a = true, b = "isSet", c = "booleanEquals", d = "error", e = "endpoint", f = "tree", g = "PartitionResult", h = "stringEquals", i = { [u]: true, "default": false, "type": "boolean" }, j = { [u]: false, "type": "string" }, k = { [x]: "Endpoint" }, l = { [v]: c, [w]: [{ [x]: "UseFIPS" }, true] }, m = { [v]: c, [w]: [{ [x]: "UseDualStack" }, true] }, n = {}, o = { [v]: "getAttr", [w]: [{ [x]: g }, "name"] }, p = { [v]: c, [w]: [{ [x]: "UseFIPS" }, false] }, q = { [v]: c, [w]: [{ [x]: "UseDualStack" }, false] }, r = { [v]: "getAttr", [w]: [{ [x]: g }, "supportsFIPS"] }, s = { [v]: c, [w]: [true, { [v]: "getAttr", [w]: [{ [x]: g }, "supportsDualStack"] }] }, t = [{ [x]: "Region" }];
-const _data = { version: "1.0", parameters: { UseDualStack: i, UseFIPS: i, Endpoint: j, Region: j }, rules: [{ conditions: [{ [v]: b, [w]: [k] }], rules: [{ conditions: [l], error: "Invalid Configuration: FIPS and custom endpoint are not supported", type: d }, { rules: [{ conditions: [m], error: "Invalid Configuration: Dualstack and custom endpoint are not supported", type: d }, { endpoint: { url: k, properties: n, headers: n }, type: e }], type: f }], type: f }, { rules: [{ conditions: [{ [v]: b, [w]: t }], rules: [{ conditions: [{ [v]: "aws.partition", [w]: t, assign: g }], rules: [{ conditions: [{ [v]: h, [w]: [o, "aws"] }, p, q], endpoint: { url: "https://{Region}.signin.aws.amazon.com", properties: n, headers: n }, type: e }, { conditions: [{ [v]: h, [w]: [o, "aws-cn"] }, p, q], endpoint: { url: "https://{Region}.signin.amazonaws.cn", properties: n, headers: n }, type: e }, { conditions: [{ [v]: h, [w]: [o, "aws-us-gov"] }, p, q], endpoint: { url: "https://{Region}.signin.amazonaws-us-gov.com", properties: n, headers: n }, type: e }, { conditions: [l, m], rules: [{ conditions: [{ [v]: c, [w]: [a, r] }, s], rules: [{ endpoint: { url: "https://signin-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", properties: n, headers: n }, type: e }], type: f }, { error: "FIPS and DualStack are enabled, but this partition does not support one or both", type: d }], type: f }, { conditions: [l, q], rules: [{ conditions: [{ [v]: c, [w]: [r, a] }], rules: [{ endpoint: { url: "https://signin-fips.{Region}.{PartitionResult#dnsSuffix}", properties: n, headers: n }, type: e }], type: f }, { error: "FIPS is enabled but this partition does not support FIPS", type: d }], type: f }, { conditions: [p, m], rules: [{ conditions: [s], rules: [{ endpoint: { url: "https://signin.{Region}.{PartitionResult#dualStackDnsSuffix}", properties: n, headers: n }, type: e }], type: f }, { error: "DualStack is enabled but this partition does not support DualStack", type: d }], type: f }, { endpoint: { url: "https://signin.{Region}.{PartitionResult#dnsSuffix}", properties: n, headers: n }, type: e }], type: f }], type: f }, { error: "Invalid Configuration: Missing Region", type: d }], type: f }] };
+const a = true, b = "isSet", c = "booleanEquals", d = "error", e = "endpoint", f = "tree", g = "PartitionResult", h = "stringEquals", i = { [u]: true, default: false, type: "boolean" }, j = { [u]: false, type: "string" }, k = { [x]: "Endpoint" }, l = { [v]: c, [w]: [{ [x]: "UseFIPS" }, true] }, m = { [v]: c, [w]: [{ [x]: "UseDualStack" }, true] }, n = {}, o = { [v]: "getAttr", [w]: [{ [x]: g }, "name"] }, p = { [v]: c, [w]: [{ [x]: "UseFIPS" }, false] }, q = { [v]: c, [w]: [{ [x]: "UseDualStack" }, false] }, r = { [v]: "getAttr", [w]: [{ [x]: g }, "supportsFIPS"] }, s = { [v]: c, [w]: [true, { [v]: "getAttr", [w]: [{ [x]: g }, "supportsDualStack"] }] }, t = [{ [x]: "Region" }];
+const _data = {
+    version: "1.0",
+    parameters: { UseDualStack: i, UseFIPS: i, Endpoint: j, Region: j },
+    rules: [
+        {
+            conditions: [{ [v]: b, [w]: [k] }],
+            rules: [
+                { conditions: [l], error: "Invalid Configuration: FIPS and custom endpoint are not supported", type: d },
+                {
+                    rules: [
+                        {
+                            conditions: [m],
+                            error: "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                            type: d,
+                        },
+                        { endpoint: { url: k, properties: n, headers: n }, type: e },
+                    ],
+                    type: f,
+                },
+            ],
+            type: f,
+        },
+        {
+            rules: [
+                {
+                    conditions: [{ [v]: b, [w]: t }],
+                    rules: [
+                        {
+                            conditions: [{ [v]: "aws.partition", [w]: t, assign: g }],
+                            rules: [
+                                {
+                                    conditions: [{ [v]: h, [w]: [o, "aws"] }, p, q],
+                                    endpoint: { url: "https://{Region}.signin.aws.amazon.com", properties: n, headers: n },
+                                    type: e,
+                                },
+                                {
+                                    conditions: [{ [v]: h, [w]: [o, "aws-cn"] }, p, q],
+                                    endpoint: { url: "https://{Region}.signin.amazonaws.cn", properties: n, headers: n },
+                                    type: e,
+                                },
+                                {
+                                    conditions: [{ [v]: h, [w]: [o, "aws-us-gov"] }, p, q],
+                                    endpoint: { url: "https://{Region}.signin.amazonaws-us-gov.com", properties: n, headers: n },
+                                    type: e,
+                                },
+                                {
+                                    conditions: [l, m],
+                                    rules: [
+                                        {
+                                            conditions: [{ [v]: c, [w]: [a, r] }, s],
+                                            rules: [
+                                                {
+                                                    endpoint: {
+                                                        url: "https://signin-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        properties: n,
+                                                        headers: n,
+                                                    },
+                                                    type: e,
+                                                },
+                                            ],
+                                            type: f,
+                                        },
+                                        {
+                                            error: "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                            type: d,
+                                        },
+                                    ],
+                                    type: f,
+                                },
+                                {
+                                    conditions: [l, q],
+                                    rules: [
+                                        {
+                                            conditions: [{ [v]: c, [w]: [r, a] }],
+                                            rules: [
+                                                {
+                                                    endpoint: {
+                                                        url: "https://signin-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                        properties: n,
+                                                        headers: n,
+                                                    },
+                                                    type: e,
+                                                },
+                                            ],
+                                            type: f,
+                                        },
+                                        { error: "FIPS is enabled but this partition does not support FIPS", type: d },
+                                    ],
+                                    type: f,
+                                },
+                                {
+                                    conditions: [p, m],
+                                    rules: [
+                                        {
+                                            conditions: [s],
+                                            rules: [
+                                                {
+                                                    endpoint: {
+                                                        url: "https://signin.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        properties: n,
+                                                        headers: n,
+                                                    },
+                                                    type: e,
+                                                },
+                                            ],
+                                            type: f,
+                                        },
+                                        { error: "DualStack is enabled but this partition does not support DualStack", type: d },
+                                    ],
+                                    type: f,
+                                },
+                                {
+                                    endpoint: { url: "https://signin.{Region}.{PartitionResult#dnsSuffix}", properties: n, headers: n },
+                                    type: e,
+                                },
+                            ],
+                            type: f,
+                        },
+                    ],
+                    type: f,
+                },
+                { error: "Invalid Configuration: Missing Region", type: d },
+            ],
+            type: f,
+        },
+    ],
+};
 exports.ruleSet = _data;
 
 
 /***/ }),
 
-/***/ 99762:
+/***/ 9762:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
-var __webpack_unused_export__;
 
 
-var middlewareHostHeader = __webpack_require__(52590);
-var middlewareLogger = __webpack_require__(85242);
-var middlewareRecursionDetection = __webpack_require__(81568);
-var middlewareUserAgent = __webpack_require__(32959);
-var configResolver = __webpack_require__(39316);
-var core = __webpack_require__(90402);
-var schema = __webpack_require__(26890);
-var middlewareContentLength = __webpack_require__(47212);
-var middlewareEndpoint = __webpack_require__(40099);
-var middlewareRetry = __webpack_require__(19618);
-var smithyClient = __webpack_require__(61411);
-var httpAuthSchemeProvider = __webpack_require__(77709);
-var runtimeConfig = __webpack_require__(455);
-var regionConfigResolver = __webpack_require__(36463);
-var protocolHttp = __webpack_require__(72356);
+var middlewareHostHeader = __webpack_require__(2590);
+var middlewareLogger = __webpack_require__(5242);
+var middlewareRecursionDetection = __webpack_require__(1568);
+var middlewareUserAgent = __webpack_require__(2959);
+var configResolver = __webpack_require__(9316);
+var core = __webpack_require__(402);
+var schema = __webpack_require__(6890);
+var middlewareContentLength = __webpack_require__(7212);
+var middlewareEndpoint = __webpack_require__(99);
+var middlewareRetry = __webpack_require__(9618);
+var smithyClient = __webpack_require__(1411);
+var httpAuthSchemeProvider = __webpack_require__(7709);
+var runtimeConfig = __webpack_require__(2836);
+var regionConfigResolver = __webpack_require__(6463);
+var protocolHttp = __webpack_require__(2356);
+var schemas_0 = __webpack_require__(890);
+var errors = __webpack_require__(7214);
+var SigninServiceException = __webpack_require__(2831);
 
 const resolveClientEndpointParameters = (options) => {
     return Object.assign(options, {
@@ -221,187 +348,6 @@ class SigninClient extends smithyClient.Client {
     }
 }
 
-class SigninServiceException extends smithyClient.ServiceException {
-    constructor(options) {
-        super(options);
-        Object.setPrototypeOf(this, SigninServiceException.prototype);
-    }
-}
-
-class AccessDeniedException extends SigninServiceException {
-    name = "AccessDeniedException";
-    $fault = "client";
-    error;
-    constructor(opts) {
-        super({
-            name: "AccessDeniedException",
-            $fault: "client",
-            ...opts,
-        });
-        Object.setPrototypeOf(this, AccessDeniedException.prototype);
-        this.error = opts.error;
-    }
-}
-class InternalServerException extends SigninServiceException {
-    name = "InternalServerException";
-    $fault = "server";
-    error;
-    constructor(opts) {
-        super({
-            name: "InternalServerException",
-            $fault: "server",
-            ...opts,
-        });
-        Object.setPrototypeOf(this, InternalServerException.prototype);
-        this.error = opts.error;
-    }
-}
-class TooManyRequestsError extends SigninServiceException {
-    name = "TooManyRequestsError";
-    $fault = "client";
-    error;
-    constructor(opts) {
-        super({
-            name: "TooManyRequestsError",
-            $fault: "client",
-            ...opts,
-        });
-        Object.setPrototypeOf(this, TooManyRequestsError.prototype);
-        this.error = opts.error;
-    }
-}
-class ValidationException extends SigninServiceException {
-    name = "ValidationException";
-    $fault = "client";
-    error;
-    constructor(opts) {
-        super({
-            name: "ValidationException",
-            $fault: "client",
-            ...opts,
-        });
-        Object.setPrototypeOf(this, ValidationException.prototype);
-        this.error = opts.error;
-    }
-}
-
-const _ADE = "AccessDeniedException";
-const _AT = "AccessToken";
-const _COAT = "CreateOAuth2Token";
-const _COATR = "CreateOAuth2TokenRequest";
-const _COATRB = "CreateOAuth2TokenRequestBody";
-const _COATRBr = "CreateOAuth2TokenResponseBody";
-const _COATRr = "CreateOAuth2TokenResponse";
-const _ISE = "InternalServerException";
-const _RT = "RefreshToken";
-const _TMRE = "TooManyRequestsError";
-const _VE = "ValidationException";
-const _aKI = "accessKeyId";
-const _aT = "accessToken";
-const _c = "client";
-const _cI = "clientId";
-const _cV = "codeVerifier";
-const _co = "code";
-const _e = "error";
-const _eI = "expiresIn";
-const _gT = "grantType";
-const _h = "http";
-const _hE = "httpError";
-const _iT = "idToken";
-const _jN = "jsonName";
-const _m = "message";
-const _rT = "refreshToken";
-const _rU = "redirectUri";
-const _s = "server";
-const _sAK = "secretAccessKey";
-const _sT = "sessionToken";
-const _sm = "smithy.ts.sdk.synthetic.com.amazonaws.signin";
-const _tI = "tokenInput";
-const _tO = "tokenOutput";
-const _tT = "tokenType";
-const n0 = "com.amazonaws.signin";
-var RefreshToken = [0, n0, _RT, 8, 0];
-var AccessDeniedException$ = [-3, n0, _ADE, { [_e]: _c }, [_e, _m], [0, 0], 2];
-schema.TypeRegistry.for(n0).registerError(AccessDeniedException$, AccessDeniedException);
-var AccessToken$ = [
-    3,
-    n0,
-    _AT,
-    8,
-    [_aKI, _sAK, _sT],
-    [
-        [0, { [_jN]: _aKI }],
-        [0, { [_jN]: _sAK }],
-        [0, { [_jN]: _sT }],
-    ],
-    3,
-];
-var CreateOAuth2TokenRequest$ = [
-    3,
-    n0,
-    _COATR,
-    0,
-    [_tI],
-    [[() => CreateOAuth2TokenRequestBody$, 16]],
-    1,
-];
-var CreateOAuth2TokenRequestBody$ = [
-    3,
-    n0,
-    _COATRB,
-    0,
-    [_cI, _gT, _co, _rU, _cV, _rT],
-    [
-        [0, { [_jN]: _cI }],
-        [0, { [_jN]: _gT }],
-        0,
-        [0, { [_jN]: _rU }],
-        [0, { [_jN]: _cV }],
-        [() => RefreshToken, { [_jN]: _rT }],
-    ],
-    2,
-];
-var CreateOAuth2TokenResponse$ = [
-    3,
-    n0,
-    _COATRr,
-    0,
-    [_tO],
-    [[() => CreateOAuth2TokenResponseBody$, 16]],
-    1,
-];
-var CreateOAuth2TokenResponseBody$ = [
-    3,
-    n0,
-    _COATRBr,
-    0,
-    [_aT, _tT, _eI, _rT, _iT],
-    [
-        [() => AccessToken$, { [_jN]: _aT }],
-        [0, { [_jN]: _tT }],
-        [1, { [_jN]: _eI }],
-        [() => RefreshToken, { [_jN]: _rT }],
-        [0, { [_jN]: _iT }],
-    ],
-    4,
-];
-var InternalServerException$ = [-3, n0, _ISE, { [_e]: _s, [_hE]: 500 }, [_e, _m], [0, 0], 2];
-schema.TypeRegistry.for(n0).registerError(InternalServerException$, InternalServerException);
-var TooManyRequestsError$ = [-3, n0, _TMRE, { [_e]: _c, [_hE]: 429 }, [_e, _m], [0, 0], 2];
-schema.TypeRegistry.for(n0).registerError(TooManyRequestsError$, TooManyRequestsError);
-var ValidationException$ = [-3, n0, _VE, { [_e]: _c, [_hE]: 400 }, [_e, _m], [0, 0], 2];
-schema.TypeRegistry.for(n0).registerError(ValidationException$, ValidationException);
-var SigninServiceException$ = [-3, _sm, "SigninServiceException", 0, [], []];
-schema.TypeRegistry.for(_sm).registerError(SigninServiceException$, SigninServiceException);
-var CreateOAuth2Token$ = [
-    9,
-    n0,
-    _COAT,
-    { [_h]: ["POST", "/v1/token", 200] },
-    () => CreateOAuth2TokenRequest$,
-    () => CreateOAuth2TokenResponse$,
-];
-
 class CreateOAuth2TokenCommand extends smithyClient.Command
     .classBuilder()
     .ep(commonParams)
@@ -410,7 +356,7 @@ class CreateOAuth2TokenCommand extends smithyClient.Command
 })
     .s("Signin", "CreateOAuth2Token", {})
     .n("SigninClient", "CreateOAuth2TokenCommand")
-    .sc(CreateOAuth2Token$)
+    .sc(schemas_0.CreateOAuth2Token$)
     .build() {
 }
 
@@ -430,57 +376,146 @@ const OAuth2ErrorCode = {
     USER_CREDENTIALS_CHANGED: "USER_CREDENTIALS_CHANGED",
 };
 
-__webpack_unused_export__ = ({
-    enumerable: true,
-    get: function () { return smithyClient.Command; }
-});
-__webpack_unused_export__ = ({
-    enumerable: true,
-    get: function () { return smithyClient.Client; }
-});
-__webpack_unused_export__ = AccessDeniedException;
-__webpack_unused_export__ = AccessDeniedException$;
-__webpack_unused_export__ = AccessToken$;
-__webpack_unused_export__ = CreateOAuth2Token$;
+exports.$Command = smithyClient.Command;
+exports.__Client = smithyClient.Client;
+exports.SigninServiceException = SigninServiceException.SigninServiceException;
 exports.CreateOAuth2TokenCommand = CreateOAuth2TokenCommand;
-__webpack_unused_export__ = CreateOAuth2TokenRequest$;
-__webpack_unused_export__ = CreateOAuth2TokenRequestBody$;
-__webpack_unused_export__ = CreateOAuth2TokenResponse$;
-__webpack_unused_export__ = CreateOAuth2TokenResponseBody$;
-__webpack_unused_export__ = InternalServerException;
-__webpack_unused_export__ = InternalServerException$;
-__webpack_unused_export__ = OAuth2ErrorCode;
-__webpack_unused_export__ = Signin;
+exports.OAuth2ErrorCode = OAuth2ErrorCode;
+exports.Signin = Signin;
 exports.SigninClient = SigninClient;
-__webpack_unused_export__ = SigninServiceException;
-__webpack_unused_export__ = SigninServiceException$;
-__webpack_unused_export__ = TooManyRequestsError;
-__webpack_unused_export__ = TooManyRequestsError$;
-__webpack_unused_export__ = ValidationException;
-__webpack_unused_export__ = ValidationException$;
+Object.prototype.hasOwnProperty.call(schemas_0, '__proto__') &&
+    !Object.prototype.hasOwnProperty.call(exports, '__proto__') &&
+    Object.defineProperty(exports, '__proto__', {
+        enumerable: true,
+        value: schemas_0['__proto__']
+    });
+
+Object.keys(schemas_0).forEach(function (k) {
+    if (k !== 'default' && !Object.prototype.hasOwnProperty.call(exports, k)) exports[k] = schemas_0[k];
+});
+Object.prototype.hasOwnProperty.call(errors, '__proto__') &&
+    !Object.prototype.hasOwnProperty.call(exports, '__proto__') &&
+    Object.defineProperty(exports, '__proto__', {
+        enumerable: true,
+        value: errors['__proto__']
+    });
+
+Object.keys(errors).forEach(function (k) {
+    if (k !== 'default' && !Object.prototype.hasOwnProperty.call(exports, k)) exports[k] = errors[k];
+});
 
 
 /***/ }),
 
-/***/ 455:
+/***/ 2831:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.SigninServiceException = exports.__ServiceException = void 0;
+const smithy_client_1 = __webpack_require__(1411);
+Object.defineProperty(exports, "__ServiceException", ({ enumerable: true, get: function () { return smithy_client_1.ServiceException; } }));
+class SigninServiceException extends smithy_client_1.ServiceException {
+    constructor(options) {
+        super(options);
+        Object.setPrototypeOf(this, SigninServiceException.prototype);
+    }
+}
+exports.SigninServiceException = SigninServiceException;
+
+
+/***/ }),
+
+/***/ 7214:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.ValidationException = exports.TooManyRequestsError = exports.InternalServerException = exports.AccessDeniedException = void 0;
+const SigninServiceException_1 = __webpack_require__(2831);
+class AccessDeniedException extends SigninServiceException_1.SigninServiceException {
+    name = "AccessDeniedException";
+    $fault = "client";
+    error;
+    constructor(opts) {
+        super({
+            name: "AccessDeniedException",
+            $fault: "client",
+            ...opts,
+        });
+        Object.setPrototypeOf(this, AccessDeniedException.prototype);
+        this.error = opts.error;
+    }
+}
+exports.AccessDeniedException = AccessDeniedException;
+class InternalServerException extends SigninServiceException_1.SigninServiceException {
+    name = "InternalServerException";
+    $fault = "server";
+    error;
+    constructor(opts) {
+        super({
+            name: "InternalServerException",
+            $fault: "server",
+            ...opts,
+        });
+        Object.setPrototypeOf(this, InternalServerException.prototype);
+        this.error = opts.error;
+    }
+}
+exports.InternalServerException = InternalServerException;
+class TooManyRequestsError extends SigninServiceException_1.SigninServiceException {
+    name = "TooManyRequestsError";
+    $fault = "client";
+    error;
+    constructor(opts) {
+        super({
+            name: "TooManyRequestsError",
+            $fault: "client",
+            ...opts,
+        });
+        Object.setPrototypeOf(this, TooManyRequestsError.prototype);
+        this.error = opts.error;
+    }
+}
+exports.TooManyRequestsError = TooManyRequestsError;
+class ValidationException extends SigninServiceException_1.SigninServiceException {
+    name = "ValidationException";
+    $fault = "client";
+    error;
+    constructor(opts) {
+        super({
+            name: "ValidationException",
+            $fault: "client",
+            ...opts,
+        });
+        Object.setPrototypeOf(this, ValidationException.prototype);
+        this.error = opts.error;
+    }
+}
+exports.ValidationException = ValidationException;
+
+
+/***/ }),
+
+/***/ 2836:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.getRuntimeConfig = void 0;
-const tslib_1 = __webpack_require__(61860);
-const package_json_1 = tslib_1.__importDefault(__webpack_require__(39955));
+const tslib_1 = __webpack_require__(1860);
+const package_json_1 = tslib_1.__importDefault(__webpack_require__(9955));
 const core_1 = __webpack_require__(8704);
-const util_user_agent_node_1 = __webpack_require__(51656);
-const config_resolver_1 = __webpack_require__(39316);
-const hash_node_1 = __webpack_require__(5092);
-const middleware_retry_1 = __webpack_require__(19618);
-const node_config_provider_1 = __webpack_require__(55704);
-const node_http_handler_1 = __webpack_require__(61279);
-const smithy_client_1 = __webpack_require__(61411);
-const util_body_length_node_1 = __webpack_require__(13638);
-const util_defaults_mode_node_1 = __webpack_require__(15435);
-const util_retry_1 = __webpack_require__(15518);
+const util_user_agent_node_1 = __webpack_require__(1656);
+const config_resolver_1 = __webpack_require__(9316);
+const hash_node_1 = __webpack_require__(2711);
+const middleware_retry_1 = __webpack_require__(9618);
+const node_config_provider_1 = __webpack_require__(5704);
+const node_http_handler_1 = __webpack_require__(1279);
+const smithy_client_1 = __webpack_require__(1411);
+const util_body_length_node_1 = __webpack_require__(3638);
+const util_defaults_mode_node_1 = __webpack_require__(673);
+const util_retry_1 = __webpack_require__(5518);
 const runtimeConfig_shared_1 = __webpack_require__(357);
 const getRuntimeConfig = (config) => {
     (0, smithy_client_1.emitWarningIfUnsupportedVersion)(process.version);
@@ -529,14 +564,15 @@ exports.getRuntimeConfig = getRuntimeConfig;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.getRuntimeConfig = void 0;
 const core_1 = __webpack_require__(8704);
-const protocols_1 = __webpack_require__(37288);
-const core_2 = __webpack_require__(90402);
-const smithy_client_1 = __webpack_require__(61411);
-const url_parser_1 = __webpack_require__(14494);
-const util_base64_1 = __webpack_require__(68385);
-const util_utf8_1 = __webpack_require__(71577);
-const httpAuthSchemeProvider_1 = __webpack_require__(77709);
-const endpointResolver_1 = __webpack_require__(12547);
+const protocols_1 = __webpack_require__(7288);
+const core_2 = __webpack_require__(402);
+const smithy_client_1 = __webpack_require__(1411);
+const url_parser_1 = __webpack_require__(4494);
+const util_base64_1 = __webpack_require__(8385);
+const util_utf8_1 = __webpack_require__(1577);
+const httpAuthSchemeProvider_1 = __webpack_require__(7709);
+const endpointResolver_1 = __webpack_require__(2547);
+const schemas_0_1 = __webpack_require__(890);
 const getRuntimeConfig = (config) => {
     return {
         apiVersion: "2023-01-01",
@@ -562,6 +598,7 @@ const getRuntimeConfig = (config) => {
         protocol: config?.protocol ?? protocols_1.AwsRestJsonProtocol,
         protocolSettings: config?.protocolSettings ?? {
             defaultNamespace: "com.amazonaws.signin",
+            errorTypeRegistries: schemas_0_1.errorTypeRegistries,
             version: "2023-01-01",
             serviceTarget: "Signin",
         },
@@ -576,13 +613,145 @@ exports.getRuntimeConfig = getRuntimeConfig;
 
 /***/ }),
 
-/***/ 39955:
+/***/ 890:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.CreateOAuth2Token$ = exports.CreateOAuth2TokenResponseBody$ = exports.CreateOAuth2TokenResponse$ = exports.CreateOAuth2TokenRequestBody$ = exports.CreateOAuth2TokenRequest$ = exports.AccessToken$ = exports.errorTypeRegistries = exports.ValidationException$ = exports.TooManyRequestsError$ = exports.InternalServerException$ = exports.AccessDeniedException$ = exports.SigninServiceException$ = void 0;
+const _ADE = "AccessDeniedException";
+const _AT = "AccessToken";
+const _COAT = "CreateOAuth2Token";
+const _COATR = "CreateOAuth2TokenRequest";
+const _COATRB = "CreateOAuth2TokenRequestBody";
+const _COATRBr = "CreateOAuth2TokenResponseBody";
+const _COATRr = "CreateOAuth2TokenResponse";
+const _ISE = "InternalServerException";
+const _RT = "RefreshToken";
+const _TMRE = "TooManyRequestsError";
+const _VE = "ValidationException";
+const _aKI = "accessKeyId";
+const _aT = "accessToken";
+const _c = "client";
+const _cI = "clientId";
+const _cV = "codeVerifier";
+const _co = "code";
+const _e = "error";
+const _eI = "expiresIn";
+const _gT = "grantType";
+const _h = "http";
+const _hE = "httpError";
+const _iT = "idToken";
+const _jN = "jsonName";
+const _m = "message";
+const _rT = "refreshToken";
+const _rU = "redirectUri";
+const _s = "smithy.ts.sdk.synthetic.com.amazonaws.signin";
+const _sAK = "secretAccessKey";
+const _sT = "sessionToken";
+const _se = "server";
+const _tI = "tokenInput";
+const _tO = "tokenOutput";
+const _tT = "tokenType";
+const n0 = "com.amazonaws.signin";
+const schema_1 = __webpack_require__(6890);
+const errors_1 = __webpack_require__(7214);
+const SigninServiceException_1 = __webpack_require__(2831);
+const _s_registry = schema_1.TypeRegistry.for(_s);
+exports.SigninServiceException$ = [-3, _s, "SigninServiceException", 0, [], []];
+_s_registry.registerError(exports.SigninServiceException$, SigninServiceException_1.SigninServiceException);
+const n0_registry = schema_1.TypeRegistry.for(n0);
+exports.AccessDeniedException$ = [-3, n0, _ADE, { [_e]: _c }, [_e, _m], [0, 0], 2];
+n0_registry.registerError(exports.AccessDeniedException$, errors_1.AccessDeniedException);
+exports.InternalServerException$ = [-3, n0, _ISE, { [_e]: _se, [_hE]: 500 }, [_e, _m], [0, 0], 2];
+n0_registry.registerError(exports.InternalServerException$, errors_1.InternalServerException);
+exports.TooManyRequestsError$ = [-3, n0, _TMRE, { [_e]: _c, [_hE]: 429 }, [_e, _m], [0, 0], 2];
+n0_registry.registerError(exports.TooManyRequestsError$, errors_1.TooManyRequestsError);
+exports.ValidationException$ = [-3, n0, _VE, { [_e]: _c, [_hE]: 400 }, [_e, _m], [0, 0], 2];
+n0_registry.registerError(exports.ValidationException$, errors_1.ValidationException);
+exports.errorTypeRegistries = [_s_registry, n0_registry];
+var RefreshToken = [0, n0, _RT, 8, 0];
+exports.AccessToken$ = [
+    3,
+    n0,
+    _AT,
+    8,
+    [_aKI, _sAK, _sT],
+    [
+        [0, { [_jN]: _aKI }],
+        [0, { [_jN]: _sAK }],
+        [0, { [_jN]: _sT }],
+    ],
+    3,
+];
+exports.CreateOAuth2TokenRequest$ = [
+    3,
+    n0,
+    _COATR,
+    0,
+    [_tI],
+    [[() => exports.CreateOAuth2TokenRequestBody$, 16]],
+    1,
+];
+exports.CreateOAuth2TokenRequestBody$ = [
+    3,
+    n0,
+    _COATRB,
+    0,
+    [_cI, _gT, _co, _rU, _cV, _rT],
+    [
+        [0, { [_jN]: _cI }],
+        [0, { [_jN]: _gT }],
+        0,
+        [0, { [_jN]: _rU }],
+        [0, { [_jN]: _cV }],
+        [() => RefreshToken, { [_jN]: _rT }],
+    ],
+    2,
+];
+exports.CreateOAuth2TokenResponse$ = [
+    3,
+    n0,
+    _COATRr,
+    0,
+    [_tO],
+    [[() => exports.CreateOAuth2TokenResponseBody$, 16]],
+    1,
+];
+exports.CreateOAuth2TokenResponseBody$ = [
+    3,
+    n0,
+    _COATRBr,
+    0,
+    [_aT, _tT, _eI, _rT, _iT],
+    [
+        [() => exports.AccessToken$, { [_jN]: _aT }],
+        [0, { [_jN]: _tT }],
+        [1, { [_jN]: _eI }],
+        [() => RefreshToken, { [_jN]: _rT }],
+        [0, { [_jN]: _iT }],
+    ],
+    4,
+];
+exports.CreateOAuth2Token$ = [
+    9,
+    n0,
+    _COAT,
+    { [_h]: ["POST", "/v1/token", 200] },
+    () => exports.CreateOAuth2TokenRequest$,
+    () => exports.CreateOAuth2TokenResponse$,
+];
+
+
+/***/ }),
+
+/***/ 9955:
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"name":"@aws-sdk/nested-clients","version":"3.975.0","description":"Nested clients for AWS SDK packages.","main":"./dist-cjs/index.js","module":"./dist-es/index.js","types":"./dist-types/index.d.ts","scripts":{"build":"yarn lint && concurrently \'yarn:build:types\' \'yarn:build:es\' && yarn build:cjs","build:cjs":"node ../../scripts/compilation/inline nested-clients","build:es":"tsc -p tsconfig.es.json","build:include:deps":"yarn g:turbo run build -F=\\"$npm_package_name\\"","build:types":"tsc -p tsconfig.types.json","build:types:downlevel":"downlevel-dts dist-types dist-types/ts3.4","clean":"premove dist-cjs dist-es dist-types tsconfig.cjs.tsbuildinfo tsconfig.es.tsbuildinfo tsconfig.types.tsbuildinfo","lint":"node ../../scripts/validation/submodules-linter.js --pkg nested-clients","test":"yarn g:vitest run","test:watch":"yarn g:vitest watch"},"engines":{"node":">=20.0.0"},"sideEffects":false,"author":{"name":"AWS SDK for JavaScript Team","url":"https://aws.amazon.com/javascript/"},"license":"Apache-2.0","dependencies":{"@aws-crypto/sha256-browser":"5.2.0","@aws-crypto/sha256-js":"5.2.0","@aws-sdk/core":"^3.973.1","@aws-sdk/middleware-host-header":"^3.972.1","@aws-sdk/middleware-logger":"^3.972.1","@aws-sdk/middleware-recursion-detection":"^3.972.1","@aws-sdk/middleware-user-agent":"^3.972.2","@aws-sdk/region-config-resolver":"^3.972.1","@aws-sdk/types":"^3.973.0","@aws-sdk/util-endpoints":"3.972.0","@aws-sdk/util-user-agent-browser":"^3.972.1","@aws-sdk/util-user-agent-node":"^3.972.1","@smithy/config-resolver":"^4.4.6","@smithy/core":"^3.21.1","@smithy/fetch-http-handler":"^5.3.9","@smithy/hash-node":"^4.2.8","@smithy/invalid-dependency":"^4.2.8","@smithy/middleware-content-length":"^4.2.8","@smithy/middleware-endpoint":"^4.4.11","@smithy/middleware-retry":"^4.4.27","@smithy/middleware-serde":"^4.2.9","@smithy/middleware-stack":"^4.2.8","@smithy/node-config-provider":"^4.3.8","@smithy/node-http-handler":"^4.4.8","@smithy/protocol-http":"^5.3.8","@smithy/smithy-client":"^4.10.12","@smithy/types":"^4.12.0","@smithy/url-parser":"^4.2.8","@smithy/util-base64":"^4.3.0","@smithy/util-body-length-browser":"^4.2.0","@smithy/util-body-length-node":"^4.2.1","@smithy/util-defaults-mode-browser":"^4.3.26","@smithy/util-defaults-mode-node":"^4.2.29","@smithy/util-endpoints":"^3.2.8","@smithy/util-middleware":"^4.2.8","@smithy/util-retry":"^4.2.8","@smithy/util-utf8":"^4.2.0","tslib":"^2.6.2"},"devDependencies":{"concurrently":"7.0.0","downlevel-dts":"0.10.1","premove":"4.0.0","typescript":"~5.8.3"},"typesVersions":{"<4.0":{"dist-types/*":["dist-types/ts3.4/*"]}},"files":["./signin.d.ts","./signin.js","./sso-oidc.d.ts","./sso-oidc.js","./sts.d.ts","./sts.js","dist-*/**"],"browser":{"./dist-es/submodules/signin/runtimeConfig":"./dist-es/submodules/signin/runtimeConfig.browser","./dist-es/submodules/sso-oidc/runtimeConfig":"./dist-es/submodules/sso-oidc/runtimeConfig.browser","./dist-es/submodules/sts/runtimeConfig":"./dist-es/submodules/sts/runtimeConfig.browser"},"react-native":{},"homepage":"https://github.com/aws/aws-sdk-js-v3/tree/main/packages/nested-clients","repository":{"type":"git","url":"https://github.com/aws/aws-sdk-js-v3.git","directory":"packages/nested-clients"},"exports":{"./package.json":"./package.json","./sso-oidc":{"types":"./dist-types/submodules/sso-oidc/index.d.ts","module":"./dist-es/submodules/sso-oidc/index.js","node":"./dist-cjs/submodules/sso-oidc/index.js","import":"./dist-es/submodules/sso-oidc/index.js","require":"./dist-cjs/submodules/sso-oidc/index.js"},"./sts":{"types":"./dist-types/submodules/sts/index.d.ts","module":"./dist-es/submodules/sts/index.js","node":"./dist-cjs/submodules/sts/index.js","import":"./dist-es/submodules/sts/index.js","require":"./dist-cjs/submodules/sts/index.js"},"./signin":{"types":"./dist-types/submodules/signin/index.d.ts","module":"./dist-es/submodules/signin/index.js","node":"./dist-cjs/submodules/signin/index.js","import":"./dist-es/submodules/signin/index.js","require":"./dist-cjs/submodules/signin/index.js"}}}');
+module.exports = /*#__PURE__*/JSON.parse('{"name":"@aws-sdk/nested-clients","version":"3.996.3","description":"Nested clients for AWS SDK packages.","main":"./dist-cjs/index.js","module":"./dist-es/index.js","types":"./dist-types/index.d.ts","scripts":{"build":"yarn lint && concurrently \'yarn:build:types\' \'yarn:build:es\' && yarn build:cjs","build:cjs":"node ../../scripts/compilation/inline nested-clients","build:es":"tsc -p tsconfig.es.json","build:include:deps":"yarn g:turbo run build -F=\\"$npm_package_name\\"","build:types":"tsc -p tsconfig.types.json","build:types:downlevel":"downlevel-dts dist-types dist-types/ts3.4","clean":"premove dist-cjs dist-es dist-types tsconfig.cjs.tsbuildinfo tsconfig.es.tsbuildinfo tsconfig.types.tsbuildinfo","lint":"node ../../scripts/validation/submodules-linter.js --pkg nested-clients","test":"yarn g:vitest run","test:watch":"yarn g:vitest watch"},"engines":{"node":">=20.0.0"},"sideEffects":false,"author":{"name":"AWS SDK for JavaScript Team","url":"https://aws.amazon.com/javascript/"},"license":"Apache-2.0","dependencies":{"@aws-crypto/sha256-browser":"5.2.0","@aws-crypto/sha256-js":"5.2.0","@aws-sdk/core":"^3.973.15","@aws-sdk/middleware-host-header":"^3.972.6","@aws-sdk/middleware-logger":"^3.972.6","@aws-sdk/middleware-recursion-detection":"^3.972.6","@aws-sdk/middleware-user-agent":"^3.972.15","@aws-sdk/region-config-resolver":"^3.972.6","@aws-sdk/types":"^3.973.4","@aws-sdk/util-endpoints":"^3.996.3","@aws-sdk/util-user-agent-browser":"^3.972.6","@aws-sdk/util-user-agent-node":"^3.973.0","@smithy/config-resolver":"^4.4.9","@smithy/core":"^3.23.6","@smithy/fetch-http-handler":"^5.3.11","@smithy/hash-node":"^4.2.10","@smithy/invalid-dependency":"^4.2.10","@smithy/middleware-content-length":"^4.2.10","@smithy/middleware-endpoint":"^4.4.20","@smithy/middleware-retry":"^4.4.37","@smithy/middleware-serde":"^4.2.11","@smithy/middleware-stack":"^4.2.10","@smithy/node-config-provider":"^4.3.10","@smithy/node-http-handler":"^4.4.12","@smithy/protocol-http":"^5.3.10","@smithy/smithy-client":"^4.12.0","@smithy/types":"^4.13.0","@smithy/url-parser":"^4.2.10","@smithy/util-base64":"^4.3.1","@smithy/util-body-length-browser":"^4.2.1","@smithy/util-body-length-node":"^4.2.2","@smithy/util-defaults-mode-browser":"^4.3.36","@smithy/util-defaults-mode-node":"^4.2.39","@smithy/util-endpoints":"^3.3.1","@smithy/util-middleware":"^4.2.10","@smithy/util-retry":"^4.2.10","@smithy/util-utf8":"^4.2.1","tslib":"^2.6.2"},"devDependencies":{"concurrently":"7.0.0","downlevel-dts":"0.10.1","premove":"4.0.0","typescript":"~5.8.3"},"typesVersions":{"<4.0":{"dist-types/*":["dist-types/ts3.4/*"]}},"files":["./cognito-identity.d.ts","./cognito-identity.js","./signin.d.ts","./signin.js","./sso-oidc.d.ts","./sso-oidc.js","./sso.d.ts","./sso.js","./sts.d.ts","./sts.js","dist-*/**"],"browser":{"./dist-es/submodules/signin/runtimeConfig":"./dist-es/submodules/signin/runtimeConfig.browser","./dist-es/submodules/sso-oidc/runtimeConfig":"./dist-es/submodules/sso-oidc/runtimeConfig.browser","./dist-es/submodules/sts/runtimeConfig":"./dist-es/submodules/sts/runtimeConfig.browser"},"react-native":{},"homepage":"https://github.com/aws/aws-sdk-js-v3/tree/main/packages/nested-clients","repository":{"type":"git","url":"https://github.com/aws/aws-sdk-js-v3.git","directory":"packages/nested-clients"},"exports":{"./package.json":"./package.json","./sso-oidc":{"types":"./dist-types/submodules/sso-oidc/index.d.ts","module":"./dist-es/submodules/sso-oidc/index.js","node":"./dist-cjs/submodules/sso-oidc/index.js","import":"./dist-es/submodules/sso-oidc/index.js","require":"./dist-cjs/submodules/sso-oidc/index.js"},"./sts":{"types":"./dist-types/submodules/sts/index.d.ts","module":"./dist-es/submodules/sts/index.js","node":"./dist-cjs/submodules/sts/index.js","import":"./dist-es/submodules/sts/index.js","require":"./dist-cjs/submodules/sts/index.js"},"./signin":{"types":"./dist-types/submodules/signin/index.d.ts","module":"./dist-es/submodules/signin/index.js","node":"./dist-cjs/submodules/signin/index.js","import":"./dist-es/submodules/signin/index.js","require":"./dist-cjs/submodules/signin/index.js"},"./cognito-identity":{"types":"./dist-types/submodules/cognito-identity/index.d.ts","module":"./dist-es/submodules/cognito-identity/index.js","node":"./dist-cjs/submodules/cognito-identity/index.js","import":"./dist-es/submodules/cognito-identity/index.js","require":"./dist-cjs/submodules/cognito-identity/index.js"},"./sso":{"types":"./dist-types/submodules/sso/index.d.ts","module":"./dist-es/submodules/sso/index.js","node":"./dist-cjs/submodules/sso/index.js","import":"./dist-es/submodules/sso/index.js","require":"./dist-cjs/submodules/sso/index.js"}}}');
 
 /***/ })
 
 };
-;
+
 //# sourceMappingURL=762.index.js.map
